@@ -12,12 +12,12 @@ def seed_data():
         db.drop_all()
         db.create_all()
         
-        # Create sample users
+        
         user1 = User(username='admin')
         user1.set_password('password')
         db.session.add(user1)
         
-        # Create sample guests
+        
         guests = [
             Guest(name='Tom Hanks', occupation='Actor'),
             Guest(name='Serena Williams', occupation='Tennis Player'),
@@ -27,7 +27,7 @@ def seed_data():
         ]
         db.session.add_all(guests)
         
-        # Create sample episodes
+        
         episodes = [
             Episode(date=date(2024, 1, 15), number=1001),
             Episode(date=date(2024, 1, 16), number=1002),
@@ -39,7 +39,7 @@ def seed_data():
         
         db.session.commit()
         
-        # Create appearances using object references to avoid relying on IDs
+        
         appearances = [
             Appearance(rating=5, guest=guests[0], episode=episodes[0]),
             Appearance(rating=4, guest=guests[1], episode=episodes[0]),

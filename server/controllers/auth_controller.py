@@ -16,22 +16,24 @@ def register():
         if not username or not password:
             return jsonify({'error': 'Username and password are required'}), 400
         
-        # Check if user already exists
         if User.query.filter_by(username=username).first():
             return jsonify({'error': 'Username already exists'}), 400
         
-        # Create new user
         user = User(username=username)
         user.set_password(password)
         
         db.session.add(user)
         db.session.commit()
+
+    
+        access_token = create_access_token(identity=user.id)
         
         return jsonify({
             'message': 'User created successfully',
-            'user': user.to_dict()
+            'user': user.to_dict(),
+            'token': access_token
         }), 201
-    
+
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 

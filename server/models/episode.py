@@ -7,7 +7,7 @@ class Episode(db.Model):
     date = db.Column(db.Date, nullable=False)
     number = db.Column(db.Integer, nullable=False, unique=True)
     
-    # Relationships with cascade delete
+    
     appearances = db.relationship('Appearance', backref='episode', lazy=True, cascade='all, delete-orphan')
     
     def to_dict(self, include_appearances=False):

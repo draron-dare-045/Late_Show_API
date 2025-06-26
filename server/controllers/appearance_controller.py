@@ -16,7 +16,7 @@ def create_appearance():
         if not data or not all(k in data for k in ['rating', 'guest_id', 'episode_id']):
             return jsonify({'error': 'Rating, guest_id, and episode_id are required'}), 400
         
-        # Validate guest and episode exist
+        
         guest = Guest.query.get(data['guest_id'])
         episode = Episode.query.get(data['episode_id'])
         
@@ -25,7 +25,7 @@ def create_appearance():
         if not episode:
             return jsonify({'error': 'Episode not found'}), 404
         
-        # Create appearance
+        
         appearance = Appearance(
             rating=data['rating'],
             guest_id=data['guest_id'],

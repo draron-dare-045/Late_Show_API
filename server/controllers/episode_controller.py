@@ -17,6 +17,7 @@ def get_episodes():
 def get_episode(id):
     try:
         episode = Episode.query.get_or_404(id)
+
         return jsonify(episode.to_dict(include_appearances=True)), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500

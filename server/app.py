@@ -15,18 +15,18 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
     
-    # Initialize extensions
+    
     db.init_app(app)
     migrate.init_app(app, db)
     jwt = JWTManager(app)
     
-    # Register blueprints
+    
     app.register_blueprint(auth_bp)
     app.register_blueprint(guest_bp)
     app.register_blueprint(episode_bp)
     app.register_blueprint(appearance_bp)
     
-    # Add root route for quick health check
+    
     @app.route('/')
     def home():
         return "Late Show API is up and running!"
